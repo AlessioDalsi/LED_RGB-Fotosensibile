@@ -1,14 +1,11 @@
-// costanti per individuare i LED R,G e B rispettivamente ai pin 3,5 e 6
+// costanti per individuare i LED R, G e B rispettivamente ai pin 5, 6, 10 (a quanto pare il pin 7 del mio arduino non funziona)
 const int LED_B_Pin = 5;
 const int LED_G_Pin = 6;
 const int LED_R_Pin = 10;
-
 const int res = A0;
 
 int value = 0;
-
 int value_R = 0;
-
 
 void setup() {
 
