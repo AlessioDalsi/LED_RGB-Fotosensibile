@@ -29,9 +29,8 @@ void loop() {
 
  Serial.println(value_R);
   //scriviamo il valore sul led R del RGB che si accenderà in funzione del valore "value_R" della fotoresistenza
-  //analogWrite(LED_B_Pin, value_R);
-  //analogWrite(LED_G_Pin, value_R);
-  analogWrite(LED_R_Pin, value_R);
+  analogWrite(LED_R_Pin, 255-value_R);
+  analogWrite(LED_B_Pin, value_R);
   delay(200);
 }
 
