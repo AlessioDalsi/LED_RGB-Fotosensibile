@@ -42,13 +42,19 @@ void loop() {
 	//	analogWrite(LED_R_Pin, 0);
 	//	analogWrite(LED_B_Pin, 0);
 	//}
-	if(hall_state == HIGH){
-		analogWrite(LED_R_Pin, 255);
-		analogWrite(LED_B_Pin, 0);
+	if (hall_state == HIGH) {
+
+		value = analogRead(res);
+		value_R = value / 4;
+
+		analogWrite(LED_R_Pin, 255 - value_R);
+		analogWrite(LED_B_Pin, value_R);
 		analogWrite(LED_G_Pin, 0);
-	}else{
+		delay(200);
+	}
+	else {
 		analogWrite(LED_R_Pin, 0);
-		analogWrite(LED_B_Pin, 255);
+		analogWrite(LED_B_Pin, 0);
 		analogWrite(LED_G_Pin, 0);
 	}
 }
