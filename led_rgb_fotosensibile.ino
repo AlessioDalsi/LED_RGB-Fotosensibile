@@ -1,5 +1,6 @@
 // costanti per individuare i LED R, G e B rispettivamente ai pin 5, 6, 10 (a quanto pare il pin 7 del mio arduino non funziona)
-#include <ESP8266.h>
+
+#include <ESP8266WiFi.h>
 
 const int LED_B_Pin = 5;
 const int LED_G_Pin = 6;
@@ -10,21 +11,33 @@ const int res = A0;
 int value = 0;
 int value_R = 0;
 
+WiFiServer server(80);
+
+const char* ssid = "TestAP";
+const char* password = "TestAP";
+const char* value = "";
+
 void setup() {
 
 	//connessione seriale
 	Serial.begin(9600);
+
+	WiFi.mode(WIFI_AP);
+	WiFi.softAP(ssid, password, 1, 1);
 
 	//impostiamo i pin RGB come uscita
 	pinMode(LED_G_Pin, OUTPUT);
 	pinMode(LED_R_Pin, OUTPUT);
 	pinMode(LED_B_Pin, OUTPUT);
 	pinMode(HALL_Pin, INPUT);
+
+	server.begin();
 }
 
 void loop() {
 
 	int hall_state = digitalRead(HALL_Pin);
+
 
 	//if (hall_state == HIGH) {
 	//	//lettura sensore A0 ovvero la tensione della fotoresistenza
