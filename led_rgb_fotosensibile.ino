@@ -38,6 +38,25 @@ void loop() {
 
 	int hall_state = digitalRead(HALL_Pin);
 
+	WiFiClient client = server.available();
+	if (!client) {
+		return;
+	}
+
+	String request = client.readStringUntil('\r');
+	Serial.println(request);
+	client.flush();
+
+	String s = "HTTP/1.1 200 OK\r\n";
+	s += "Content-Type: application/json\r\n\r\n";
+	s += "{\"data\":{\"message\":\"success\",\"value\":\"";
+	s += value;
+	s += "\"}}\r\n";
+	s += "\n";
+
+	client.print(s);
+	delay(1);
+	Serial.println("Client disconnected");
 
 	//if (hall_state == HIGH) {
 	//	//lettura sensore A0 ovvero la tensione della fotoresistenza
