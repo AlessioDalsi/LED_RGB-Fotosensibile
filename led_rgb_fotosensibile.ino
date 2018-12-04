@@ -12,6 +12,7 @@ int value = 0;
 int value_R = 0;
 
 WiFiServer server(80);
+WiFiClient client=server.available();
 
 const char* ssid = "TestAP";
 const char* password = "TestAP";
@@ -20,10 +21,10 @@ const char* value = "";
 void setup() {
 
 	//connessione seriale
-	Serial.begin(9600);
+	Serial.begin(115200);
 
 	WiFi.mode(WIFI_AP);
-	WiFi.softAP(ssid, password, 1, 1);
+	WiFi.softAP(ssid, password);
 
 	//impostiamo i pin RGB come uscita
 	pinMode(LED_G_Pin, OUTPUT);
@@ -31,9 +32,31 @@ void setup() {
 	pinMode(LED_B_Pin, OUTPUT);
 	pinMode(HALL_Pin, INPUT);
 
+	analogWrite(LED_R_Pin, 0);
+	analogWrite(LED_G_Pin, 0);
+	analogWrite(LED_B_Pin, 0);
+
 	server.begin();
+
+	Serial.println(WiFi.localIP());
+	String request= client.readStringUntil('\r');
+	Serial.print(request);
+	client.flush();
+
+	int val;
+
+
 }
 
+void loop() {
+
+}
+
+
+
+
+
+/*	PROGRAMMA L&S PRE-WIFI
 void loop() {
 
 	int hall_state = digitalRead(HALL_Pin);
@@ -62,7 +85,7 @@ void loop() {
 	//	//lettura sensore A0 ovvero la tensione della fotoresistenza
 	//	value = analogRead(res);
 	//	value_R = value / 4;
-	//		
+	//
 
 	//	Serial.println(value_R);
 	//	//il 255 serve a invertire il funzionamento più c'è luce meno si accende il led
@@ -91,3 +114,4 @@ void loop() {
 	}
 }
 
+*/
