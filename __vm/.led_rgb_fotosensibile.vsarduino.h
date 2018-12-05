@@ -24,6 +24,7 @@
 #define ARDUINO_ESP8266_GENERIC
 #define ARDUINO_ARCH_ESP8266
 #define LED_BUILTIN 2
+#define F_CRYSTAL 40000000
 #define ESP8266
 #define __cplusplus 201103L
 #undef __cplusplus

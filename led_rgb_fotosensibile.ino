@@ -8,11 +8,11 @@ const int LED_R_Pin = 10;
 const int HALL_Pin = 11;
 const int res = A0;
 
-int value = 0;
+//int value = 0;
 int value_R = 0;
 
 WiFiServer server(80);
-WiFiClient client=server.available();
+WiFiClient client = server.available();
 
 const char* ssid = "TestAP";
 const char* password = "TestAP";
@@ -39,12 +39,38 @@ void setup() {
 	server.begin();
 
 	Serial.println(WiFi.localIP());
-	String request= client.readStringUntil('\r');
+	String request = client.readStringUntil('\r');
 	Serial.print(request);
 	client.flush();
 
 	int val;
+	if (request.indexOf("/led/0") != -1) //led on
+		val = 0;
+	else if (request.indexOf("/led/1") != -1)
+		val = 255;
+	else {
+		Serial.println("Invalid request");
+		client.stop();
+		return;
+	}
 
+	analogWrite(LED_R_Pin, val);
+
+	client.flush();
+
+	client.println("HTTP/1.1 200 OK");
+	client.println("Content-Type: text/html");
+	client.println("");
+	client.println("Led pin is now: ");
+
+	if (val == 1) {
+		client.print("on");
+	}
+	else {
+		client.print("off");
+	}
+
+	Serial.println("Client disconnected");
 
 }
 
