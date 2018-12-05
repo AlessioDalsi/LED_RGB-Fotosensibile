@@ -1,7 +1,5 @@
 // costanti per individuare i LED R, G e B rispettivamente ai pin 5, 6, 10 (a quanto pare il pin 7 del mio arduino non funziona)
-
-#include <DHT_U.h>
-#include <DHT.h>
+#include <ESP8266.h>
 
 const int LED_B_Pin = 5;
 const int LED_G_Pin = 6;
@@ -11,14 +9,6 @@ const int res = A0;
 
 int value = 0;
 int value_R = 0;
-
-#define DHT_PIN 12
-#define DHT_TYPE DHT11
-
-float temperatura;
-float umidita;
-
-DHT dht(DHT_PIN, DHT_TYPE);
 
 void setup() {
 
@@ -30,28 +20,9 @@ void setup() {
 	pinMode(LED_R_Pin, OUTPUT);
 	pinMode(LED_B_Pin, OUTPUT);
 	pinMode(HALL_Pin, INPUT);
-
-	dht.begin();
 }
 
 void loop() {
-
-	delay(2000);
-
-	umidita = dht.readHumidity();
-	temperatura = dht.readTemperature();
-
-	if (isnan(umidita) || isnan(temperatura)) {
-		Serial.println("Failed to read from DHT sensor!");
-		return;
-	}
-
-	Serial.println("Umidità: ");
-	Serial.print(umidita);
-	Serial.print(" %\t");
-	Serial.println("Temperatura: ");
-	Serial.print(temperatura);
-	Serial.print(" °C ");
 
 	int hall_state = digitalRead(HALL_Pin);
 
