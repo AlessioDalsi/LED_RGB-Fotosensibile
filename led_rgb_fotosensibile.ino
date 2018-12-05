@@ -1,5 +1,6 @@
 // costanti per individuare i LED R, G e B rispettivamente ai pin 5, 6, 10 (a quanto pare il pin 7 del mio arduino non funziona)
-#include <ESP8266.h>
+
+#include <ESP8266WiFi.h>
 
 const int LED_B_Pin = 5;
 const int LED_G_Pin = 6;
@@ -7,30 +8,110 @@ const int LED_R_Pin = 10;
 const int HALL_Pin = 11;
 const int res = A0;
 
-int value = 0;
+//int value = 0;
 int value_R = 0;
+
+WiFiServer server(80);
+WiFiClient client = server.available();
+
+const char* ssid = "TestAP";
+const char* password = "TestAP";
+const char* value = "";
 
 void setup() {
 
 	//connessione seriale
-	Serial.begin(9600);
+	Serial.begin(115200);
+
+	WiFi.mode(WIFI_AP);
+	WiFi.softAP(ssid, password);
 
 	//impostiamo i pin RGB come uscita
 	pinMode(LED_G_Pin, OUTPUT);
 	pinMode(LED_R_Pin, OUTPUT);
 	pinMode(LED_B_Pin, OUTPUT);
 	pinMode(HALL_Pin, INPUT);
+
+	analogWrite(LED_R_Pin, 0);
+	analogWrite(LED_G_Pin, 0);
+	analogWrite(LED_B_Pin, 0);
+
+	server.begin();
+
+	Serial.println(WiFi.localIP());
+	String request = client.readStringUntil('\r');
+	Serial.print(request);
+	client.flush();
+
+	int val;
+	if (request.indexOf("/led/0") != -1) //led on
+		val = 0;
+	else if (request.indexOf("/led/1") != -1)
+		val = 255;
+	else {
+		Serial.println("Invalid request");
+		client.stop();
+		return;
+	}
+
+	analogWrite(LED_R_Pin, val);
+
+	client.flush();
+
+	client.println("HTTP/1.1 200 OK");
+	client.println("Content-Type: text/html");
+	client.println("");
+	client.println("Led pin is now: ");
+
+	if (val == 1) {
+		client.print("on");
+	}
+	else {
+		client.print("off");
+	}
+
+	Serial.println("Client disconnected");
+
 }
 
 void loop() {
 
+}
+
+
+
+
+
+/*	PROGRAMMA L&S PRE-WIFI
+void loop() {
+
 	int hall_state = digitalRead(HALL_Pin);
+
+	WiFiClient client = server.available();
+	if (!client) {
+		return;
+	}
+
+	String request = client.readStringUntil('\r');
+	Serial.println(request);
+	client.flush();
+
+	String s = "HTTP/1.1 200 OK\r\n";
+	s += "Content-Type: application/json\r\n\r\n";
+	s += "{\"data\":{\"message\":\"success\",\"value\":\"";
+	s += value;
+	s += "\"}}\r\n";
+	s += "\n";
+
+	client.print(s);
+	delay(1);
+	Serial.println("Client disconnected");
 
 	//if (hall_state == HIGH) {
 	//	//lettura sensore A0 ovvero la tensione della fotoresistenza
 	//	value = analogRead(res);
 	//	value_R = value / 4;
-	//		
+	//
 
 	//	Serial.println(value_R);
 	//	//il 255 serve a invertire il funzionamento più c'è luce meno si accende il led
@@ -59,3 +140,4 @@ void loop() {
 	}
 }
 
+*/
