@@ -12,8 +12,8 @@ const int res = A0;
 int value = 0;
 int value_R = 0;
 
-#define DHT_PIN 12
-#define DHT_TYPE DHT11
+#define DHT_PIN 2
+#define DHT_TYPE DHT22
 
 float temperatura;
 float umidita;
