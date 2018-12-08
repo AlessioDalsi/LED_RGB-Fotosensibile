@@ -55,27 +55,15 @@ void loop() {
 
 	int hall_state = digitalRead(HALL_Pin);
 
-	//if (hall_state == HIGH) {
-	//	//lettura sensore A0 ovvero la tensione della fotoresistenza
-	//	value = analogRead(res);
-	//	value_R = value / 4;
-	//		
-
-	//	Serial.println(value_R);
-	//	//il 255 serve a invertire il funzionamento più c'è luce meno si accende il led
-	//	//Il led rosso serve a rappresentare i colori caldi mentre il blu i freddi
-	//	analogWrite(LED_G_Pin, 255 - value_R);
-	//	analogWrite(LED_B_Pin, value_R);
-	//	delay(200);
-	//}else{
-	//	analogWrite(LED_R_Pin, 0);
-	//	analogWrite(LED_B_Pin, 0);
-	//}
 	if (hall_state == HIGH) {
-
+		//lettura sensore A0 ovvero la tensione della fotoresistenza
 		value = analogRead(res);
 		value_R = value / 4;
+		
+		//Serial.println(value_R);
 
+		//il 255 serve a invertire il funzionamento più c'è luce meno si accende il led
+		//Il led rosso serve a rappresentare i colori caldi mentre il blu i freddi
 		analogWrite(LED_R_Pin, 255 - value_R);
 		analogWrite(LED_B_Pin, value_R);
 		analogWrite(LED_G_Pin, 0);
@@ -86,5 +74,6 @@ void loop() {
 		analogWrite(LED_B_Pin, 0);
 		analogWrite(LED_G_Pin, 0);
 	}
+		
 }
 
