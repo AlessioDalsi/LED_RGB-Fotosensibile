@@ -12,13 +12,13 @@ const int res = A0;
 int value = 0;
 int value_R = 0;
 
-#define DHT_PIN 2
-#define DHT_TYPE DHT22
+#define DHTPIN 2
+#define DHTTYPE DHT11
 
 float temperatura;
 float umidita;
 
-DHT dht(DHT_PIN, DHT_TYPE);
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
 
