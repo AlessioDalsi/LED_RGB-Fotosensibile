@@ -15,11 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="led_rgb_fotosensibile.ino" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="__vm\.led_rgb_fotosensibile.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LS.ino" />
   </ItemGroup>
 </Project>
