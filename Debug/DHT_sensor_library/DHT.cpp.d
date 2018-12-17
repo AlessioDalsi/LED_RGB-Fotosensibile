@@ -1,4 +1,4 @@
-C:\Users\aless\AppData\Local\Temp\VMBuilds\led_rgb_fotosensibile\uno\Debug\DHT_sensor_library\DHT.cpp.o: \
+C:\Users\aless\AppData\Local\Temp\VMBuilds\LS\uno\Debug\DHT_sensor_library\DHT.cpp.o: \
  C:\Users\aless\OneDrive\Progetti\Arduino\libraries\DHT_sensor_library\DHT.cpp \
  C:\Users\aless\OneDrive\Progetti\Arduino\libraries\DHT_sensor_library\DHT.h \
  C:\Users\aless\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.23\cores\arduino/Arduino.h \

@@ -1,4 +1,4 @@
-C:\Users\aless\AppData\Local\Temp\VMBuilds\led_rgb_fotosensibile\uno\Debug\VM_DBG\VM_DBG.cpp.o: \
+C:\Users\aless\AppData\Local\Temp\VMBuilds\LS\uno\Debug\VM_DBG\VM_DBG.cpp.o: \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2017\enterprise\common7\ide\extensions\rklz3tds.z1r\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2017\enterprise\common7\ide\extensions\rklz3tds.z1r\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
  C:\Users\aless\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.23\cores\arduino/Arduino.h \
