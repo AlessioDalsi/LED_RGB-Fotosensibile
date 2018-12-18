@@ -120,9 +120,9 @@ void loop() {
 					delay(500);
 				}
 				else {
-					analogWrite(LED_R_Pin, value_R);
-					analogWrite(LED_B_Pin, 255 - value_R);
-					analogWrite(LED_G_Pin, 0);
+					analogWrite(LED_R_Pin, 0);
+					analogWrite(LED_B_Pin, 0);
+					analogWrite(LED_G_Pin, 255);
 				}
 			}
 			else if (message == "0") {
