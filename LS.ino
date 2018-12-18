@@ -74,6 +74,8 @@ void loop() {
 
 	if (isnan(umidita) || isnan(temperatura)) {
 		Serial.println("Failed to read from DHT sensor!");
+		lcd.clear();
+		lcd.println("Failed to read from DHT sensor!");
 		return;
 	}
 
@@ -113,7 +115,7 @@ void loop() {
 					analogWrite(LED_R_Pin, 255 - value_R);
 					analogWrite(LED_B_Pin, value_R);
 					analogWrite(LED_G_Pin, 0);
-					delay(200);
+					delay(500);
 				}
 				else {
 					analogWrite(LED_R_Pin, value_R);
