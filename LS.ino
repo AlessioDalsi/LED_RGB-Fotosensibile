@@ -34,7 +34,7 @@ int txPin = 3;
 SoftwareSerial bluetooth(rxPin, txPin);
 
 String message; //string that stores the incoming message
-const int Led = 13;
+const int BT_Led = 13;
 
 
 
@@ -50,7 +50,7 @@ void setup() {
 	pinMode(LED_B_Pin, OUTPUT);
 	pinMode(HALL_Pin, INPUT);
 
-	pinMode(Led, OUTPUT);
+	pinMode(BT_Led, OUTPUT);
 
 	lcd.begin();
 	lcd.backlight();
@@ -95,6 +95,8 @@ void loop() {
 
 			if (message == "1") {
 
+				digitalWrite(BT_Led, HIGH);
+
 				bluetooth.println("Sistema acceso");
 
 				bluetooth.println("Temperatura: ");
@@ -124,6 +126,8 @@ void loop() {
 				}
 			}
 			else if (message == "0") {
+
+				digitalWrite(BT_Led, LOW);
 
 				bluetooth.println("Sistema spento");
 
