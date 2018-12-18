@@ -29,8 +29,8 @@ DHT dht(DHTPIN, DHTTYPE);
 
 //Bluetooth
 
-int rxPin = 2;
-int txPin = 3;
+int rxPin = 9;
+int txPin = 8;
 SoftwareSerial bluetooth(rxPin, txPin);
 
 String message; //string that stores the incoming message
@@ -62,9 +62,10 @@ void setup() {
 
 void loop() {
 
+
 	while (bluetooth.available())
 	{
-		message += char(bluetooth.read());
+		message = char(bluetooth.read());
 	}
 
 	delay(2000);
@@ -85,6 +86,7 @@ void loop() {
 	lcd.println("Temperatura: ");
 	lcd.print(temperatura);
 	lcd.print(" C");
+	String text = "";
 
 	int hall_state = digitalRead(HALL_Pin);
 
@@ -99,10 +101,8 @@ void loop() {
 
 				bluetooth.println("Sistema acceso");
 
-				bluetooth.println("Temperatura: ");
-				bluetooth.print(temperatura);
-				bluetooth.println("Umidita: ");
-				bluetooth.print(umidita);
+				text = "Temperatura :" + String(temperatura) + " Umidita: " + String(umidita) + ";";
+				bluetooth.print(text);
 
 
 				if (hall_state == HIGH) {
@@ -130,11 +130,10 @@ void loop() {
 				digitalWrite(BT_Led, LOW);
 
 				bluetooth.println("Sistema spento");
+				bluetooth.print(";");
 
-				bluetooth.println("Temperatura: ");
-				bluetooth.print(temperatura);
-				bluetooth.println("Umidita: ");
-				bluetooth.print(umidita);
+				text = "Temperatura :" + String(temperatura) + " Umidita: " + String(umidita) + ";";
+				bluetooth.print(text);
 
 
 				analogWrite(LED_R_Pin, 0);
@@ -144,5 +143,6 @@ void loop() {
 
 		}
 	}
+
 }
 
