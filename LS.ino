@@ -77,7 +77,7 @@ void loop() {
 		return;
 	}
 
-	lcd.println("Umidità: ");
+	lcd.println("Umidit: ");
 	lcd.print(umidita);
 	lcd.print(" % ");
 	lcd.println("Temperatura: ");
@@ -86,9 +86,17 @@ void loop() {
 
 	int hall_state = digitalRead(HALL_Pin);
 
+	bluetooth.println("Temperatura: ");
+	bluetooth.print(temperatura);
+	bluetooth.println("Umidita: ");
+	bluetooth.print(umidita);
+
+
+
 	if (!bluetooth.available()) {
 		if (message != "") {
 			if (message == "1") {
+				bluetooth.println("Sistema acceso");
 				if (hall_state == HIGH) {
 					//lettura sensore A0 ovvero la tensione della fotoresistenza
 					value = analogRead(res);
@@ -110,6 +118,7 @@ void loop() {
 				}
 			}
 			else if (message == "0") {
+				bluetooth.println("Sistema spento");
 				analogWrite(LED_R_Pin, 0);
 				analogWrite(LED_B_Pin, 0);
 				analogWrite(LED_G_Pin, 0);
